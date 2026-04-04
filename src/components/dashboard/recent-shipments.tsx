@@ -83,23 +83,23 @@ type StatusConfig = {
 const STATUS_CONFIG: Record<string, StatusConfig> = {
   Cleared: {
     icon: IconCircleCheck,
-    color: "#34d399",
-    bg: "#34d39915",
+    color: "#34d39980",
+    bg: "#34d3990d",
   },
   "Pending Review": {
     icon: IconCircleDotted,
-    color: "#fbbf24",
-    bg: "#fbbf2415",
+    color: "#fbbf2480",
+    bg: "#fbbf240d",
   },
   "CBAM Flagged": {
     icon: IconAlertHexagon,
-    color: "#FF70B5",
-    bg: "#FF70B515",
+    color: "#FF70B580",
+    bg: "#FF70B50d",
   },
   "In Transit": {
     icon: IconTruck,
-    color: "#60a5fa",
-    bg: "#60a5fa15",
+    color: "#60a5fa80",
+    bg: "#60a5fa0d",
   },
 }
 

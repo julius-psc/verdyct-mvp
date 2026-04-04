@@ -53,12 +53,12 @@ const ACTIVITY: ActivityItem[] = [
 
 // Colours exactly match the status badge hex values used in the table
 const DOT_CONFIG: Record<ActivityItem["type"], { color: string; label: string }> = {
-  cleared:  { color: "#34d399", label: "Cleared" },
-  flagged:  { color: "#FF70B5", label: "CBAM Flagged" },
-  uploaded: { color: "#94a3b8", label: "Document uploaded" },
-  review:   { color: "#fbbf24", label: "Pending Review" },
-  transit:  { color: "#60a5fa", label: "In Transit" },
-  assigned: { color: "#a78bfa", label: "Assigned" },
+  cleared:  { color: "#34d39966", label: "Cleared" },
+  flagged:  { color: "#FF70B566", label: "CBAM Flagged" },
+  uploaded: { color: "#94a3b866", label: "Document uploaded" },
+  review:   { color: "#fbbf2466", label: "Pending Review" },
+  transit:  { color: "#60a5fa66", label: "In Transit" },
+  assigned: { color: "#a78bfa66", label: "Assigned" },
 }
 
 export function ActivityFeed({ extraItems = [] }: { extraItems?: ActivityItem[] }) {
