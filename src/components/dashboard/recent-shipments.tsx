@@ -134,7 +134,8 @@ export function RecentShipments({ extraRow }: { extraRow?: Shipment }) {
         </button>
       </div>
 
-      <div className="overflow-hidden rounded-xl ring-1 ring-foreground/10">
+      {/* Desktop table */}
+      <div className="hidden overflow-hidden rounded-xl ring-1 ring-foreground/10 sm:block">
         <Table>
           <TableHeader>
             <TableRow className="border-b border-border hover:bg-transparent">
@@ -171,6 +172,19 @@ export function RecentShipments({ extraRow }: { extraRow?: Shipment }) {
             ))}
           </TableBody>
         </Table>
+      </div>
+
+      {/* Mobile card list */}
+      <div className="flex flex-col divide-y divide-border overflow-hidden rounded-xl ring-1 ring-foreground/10 sm:hidden">
+        {rows.map((shipment) => (
+          <div key={shipment.id} className="flex items-center justify-between gap-3 px-3.5 py-3">
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-xs font-medium text-foreground">{shipment.document}</p>
+              <p className="mt-0.5 text-[11px] text-muted-foreground">{shipment.client} · {shipment.date}</p>
+            </div>
+            <StatusCell status={shipment.status} />
+          </div>
+        ))}
       </div>
     </div>
   )

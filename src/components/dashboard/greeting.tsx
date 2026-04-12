@@ -27,11 +27,11 @@ export function Greeting() {
   if (!now) return null
 
   return (
-    <div>
+    <div className="min-w-0">
       <h1 className="text-base font-semibold text-foreground">
         {getGreeting(now.getHours())}, Julius
       </h1>
-      <p className="mt-0.5 text-xs text-muted-foreground">
+      <p className="mt-0.5 truncate text-xs text-muted-foreground">
         {formatDate(now)}
       </p>
     </div>

@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Verdyct",
-  description: "Trade compliance dashboard",
+  title: "Verdyct — AI Customs Compliance",
+  description: "Verdyct automates document processing, HS code classification, and CBAM compliance for independent customs brokers and freight forwarders. AI-native, live in 1 day, built for SME brokers.",
 };
 
 export default function RootLayout({

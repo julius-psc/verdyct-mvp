@@ -21,8 +21,8 @@ export default function DashboardPage() {
   )
 
   return (
-    <div className="flex flex-col gap-6 p-6">
-      <div className="flex items-center justify-between">
+    <div className="flex flex-col gap-5 p-4 sm:gap-6 sm:p-6">
+      <div className="flex items-center justify-between gap-3">
         <Greeting />
         <UploadButton onSuccess={handleUploadSuccess} />
       </div>

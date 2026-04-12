@@ -90,8 +90,8 @@ export function UploadButton({
   const [isOpen, setIsOpen] = useState(false)
   const [step, setStep] = useState<ModalStep>("dropzone")
   const [isDragging, setIsDragging] = useState(false)
-  const [fileName, setFileName] = useState("Invoice_Thyssenkrupp_March2026.pdf")
-  const [fileSize, setFileSize] = useState("2.4 MB")
+  const [fileName, setFileName] = useState("Invoice_Thyssenkrupp-AG_April2026.pdf")
+  const [fileSize, setFileSize] = useState("59 KB")
   const [msgIndex, setMsgIndex] = useState(0)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -102,7 +102,7 @@ export function UploadButton({
     return () => { clearInterval(interval); clearTimeout(timeout) }
   }, [step])
 
-  const open = () => { setStep("dropzone"); setMsgIndex(0); setIsOpen(true) }
+  const open = () => { setStep("file-selected"); setMsgIndex(0); setIsOpen(true) }
   const close = () => setIsOpen(false)
 
   const handleFile = useCallback((file: File) => {
@@ -138,6 +138,7 @@ export function UploadButton({
     )
     toast.success("Shipment saved successfully", {
       description: "HS Code 7228.30 suggested — review recommended",
+      icon: <IconCircleCheckFilled size={16} style={{ color: "#34d399" }} />,
     })
   }
 
@@ -149,9 +150,9 @@ export function UploadButton({
       <button
         type="button"
         onClick={open}
-        className="inline-flex h-7 items-center gap-1.5 rounded-md px-3 text-xs font-medium text-white transition-colors"
+        className="inline-flex h-7 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-3 text-xs font-medium text-white transition-colors"
         style={{ background: "#FF70B5" }}
-        onMouseEnter={e => (e.currentTarget.style.background = "#ff50a8")}
+        onMouseEnter={e => (e.currentTarget.style.background = "#e85faa")}
         onMouseLeave={e => (e.currentTarget.style.background = "#FF70B5")}
       >
         <IconUpload size={13} stroke={2} />
@@ -259,7 +260,7 @@ export function UploadButton({
                       onClick={() => { setStep("processing"); setMsgIndex(0) }}
                       className="inline-flex h-9 w-full items-center justify-center gap-2 rounded-md text-sm font-medium text-white transition-colors"
                       style={{ background: "#FF70B5" }}
-                      onMouseEnter={e => (e.currentTarget.style.background = "#ff50a8")}
+                      onMouseEnter={e => (e.currentTarget.style.background = "#e85faa")}
                       onMouseLeave={e => (e.currentTarget.style.background = "#FF70B5")}
                     >
                       Submit for Analysis
@@ -310,7 +311,7 @@ export function UploadButton({
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-[140px_1fr] gap-x-4 gap-y-2.5">
+                  <div className="grid grid-cols-[100px_1fr] gap-x-3 gap-y-2.5 sm:grid-cols-[140px_1fr] sm:gap-x-4">
                     {EXTRACTED_FIELDS.map(field => (
                       <React.Fragment key={field.label}>
                         <FieldRow field={field} />
@@ -324,7 +325,7 @@ export function UploadButton({
                       onClick={handleSave}
                       className="flex h-8 w-full items-center justify-center rounded-md text-xs font-medium text-white transition-colors"
                       style={{ background: "#FF70B5" }}
-                      onMouseEnter={e => (e.currentTarget.style.background = "#ff50a8")}
+                      onMouseEnter={e => (e.currentTarget.style.background = "#e85faa")}
                       onMouseLeave={e => (e.currentTarget.style.background = "#FF70B5")}
                     >
                       Save Shipment
