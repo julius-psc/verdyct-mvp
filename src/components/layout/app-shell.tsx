@@ -12,6 +12,7 @@ import {
 } from "iconoir-react"
 
 import { cn } from "@/lib/utils"
+import { ThemeToggle } from "./theme-toggle"
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/", icon: HomeSimple, disabled: false },
@@ -55,8 +56,8 @@ function NavItem({
       className={cn(
         "flex items-center gap-2.5 rounded-md px-2.5 py-2 text-xs transition-colors",
         active
-          ? "bg-white/8 text-foreground font-medium"
-          : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+          ? "bg-black/6 dark:bg-white/8 text-foreground font-medium"
+          : "text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 hover:text-foreground"
       )}
     >
       <Icon
@@ -105,7 +106,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </nav>
 
         {/* Bottom nav */}
-        <div className="px-3 pb-4">
+        <div className="px-3 pb-4 flex flex-col gap-0.5">
+          <ThemeToggle />
           {BOTTOM_NAV_ITEMS.map((item) => (
             <NavItem key={item.href} href={item.href} label={item.label} icon={item.icon} disabled={item.disabled} />
           ))}

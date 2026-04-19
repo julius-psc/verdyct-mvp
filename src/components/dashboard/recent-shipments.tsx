@@ -76,30 +76,25 @@ const SHIPMENTS: Shipment[] = [
 
 type StatusConfig = {
   icon: React.ComponentType<{ size?: number; stroke?: number }>
-  color: string
-  bg: string
+  className: string
 }
 
 const STATUS_CONFIG: Record<string, StatusConfig> = {
   Cleared: {
     icon: IconCircleCheck,
-    color: "#34d39980",
-    bg: "#34d3990d",
+    className: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400",
   },
   "Pending Review": {
     icon: IconCircleDotted,
-    color: "#fbbf2480",
-    bg: "#fbbf240d",
+    className: "bg-amber-100 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400",
   },
   "CBAM Flagged": {
     icon: IconAlertHexagon,
-    color: "#FF70B580",
-    bg: "#FF70B50d",
+    className: "bg-pink-100 text-pink-600 dark:bg-pink-500/10 dark:text-pink-400",
   },
   "In Transit": {
     icon: IconTruck,
-    color: "#60a5fa80",
-    bg: "#60a5fa0d",
+    className: "bg-blue-100 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400",
   },
 }
 
@@ -110,8 +105,7 @@ function StatusCell({ status }: { status: string }) {
 
   return (
     <span
-      className="inline-flex h-5 items-center gap-1.5 rounded-full px-2 text-xs font-medium"
-      style={{ background: config.bg, color: config.color }}
+      className={`inline-flex h-5 items-center gap-1.5 rounded-full px-2 text-xs font-medium ${config.className}`}
     >
       <Icon size={11} stroke={2} />
       {status}

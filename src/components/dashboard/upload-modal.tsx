@@ -50,18 +50,17 @@ const EXTRACTED_FIELDS: ExtractedField[] = [
 // ─── Field row ────────────────────────────────────────────────────────────────
 
 function FieldRow({ field }: { field: ExtractedField }) {
-  const labelColor = field.confidence === "medium" ? "rgba(251,191,36,0.7)" : "rgba(255,255,255,0.38)"
+  const labelClass = field.confidence === "medium"
+    ? "self-center text-[11px] text-amber-500"
+    : "self-center text-[11px] text-muted-foreground"
 
   if (field.special === "cbam") {
     return (
       <>
-        <span className="self-center" style={{ color: labelColor, fontSize: 11 }}>{field.label}</span>
-        <div
-          className="flex items-center gap-2 rounded-md px-3 py-2"
-          style={{ background: "#FF70B515" }}
-        >
-          <IconAlertHexagon size={13} style={{ color: "#FF70B5", flexShrink: 0 }} />
-          <span style={{ color: "#FF70B5", fontSize: 11, fontWeight: 500 }}>
+        <span className={labelClass}>{field.label}</span>
+        <div className="flex items-center gap-2 rounded-md px-3 py-2 bg-pink-50 dark:bg-[#FF70B515]">
+          <IconAlertHexagon size={13} className="text-[#FF70B5] shrink-0" />
+          <span className="text-[11px] font-medium text-[#FF70B5]">
             CBAM Applicable — Steel products detected
           </span>
         </div>
@@ -71,10 +70,10 @@ function FieldRow({ field }: { field: ExtractedField }) {
 
   return (
     <>
-      <span className="self-center" style={{ color: labelColor, fontSize: 11 }}>{field.label}</span>
+      <span className={labelClass}>{field.label}</span>
       <input
         defaultValue={field.value}
-        className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white outline-none focus:border-white/20"
+        className="w-full rounded-md border border-border bg-muted/50 px-3 py-1.5 text-xs text-foreground outline-none focus:border-ring transition-colors"
       />
     </>
   )
@@ -159,22 +158,19 @@ export function UploadButton({
         Upload Document
       </button>
 
-      {/* Overlay — scrollable so modal never clips */}
+      {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 overflow-y-auto"
-          style={{ background: "rgba(0,0,0,0.65)" }}
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/50 dark:bg-black/65"
           onClick={close}
         >
           <div className="flex min-h-full items-center justify-center p-6">
             <div
               onClick={e => e.stopPropagation()}
-              className="relative flex flex-col rounded-xl p-6"
+              className="relative flex flex-col rounded-xl border border-border bg-card p-6 shadow-xl dark:shadow-[0_24px_48px_rgba(0,0,0,0.6)]"
               style={{
                 width: modalWidth,
                 maxWidth: "calc(100vw - 48px)",
-                background: "#0d0d0d",
-                border: "1px solid rgba(255,255,255,0.08)",
                 transition: "width 0.3s ease",
                 animation: "modal-in 0.2s ease both",
               }}
@@ -183,7 +179,7 @@ export function UploadButton({
               {/* ── Drop zone ── */}
               {step === "dropzone" && (
                 <div className="flex flex-col gap-5">
-                  <h2 className="text-base font-semibold text-white">Upload Document</h2>
+                  <h2 className="text-base font-semibold text-foreground">Upload Document</h2>
 
                   <div
                     className="flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl py-14 transition-colors"
@@ -209,10 +205,10 @@ export function UploadButton({
                   >
                     <IconUpload size={26} style={{ color: "#FF70B5" }} stroke={1.5} />
                     <div className="text-center">
-                      <p className="text-sm font-medium text-white">Drop your PDF here</p>
+                      <p className="text-sm font-medium text-foreground">Drop your PDF here</p>
                       <p className="mt-1 text-xs text-muted-foreground">or click to browse</p>
                     </div>
-                    <p className="text-[11px]" style={{ color: "rgba(255,255,255,0.25)" }}>
+                    <p className="text-[11px] text-muted-foreground/60">
                       Supports: Commercial Invoice, Bill of Lading, Packing List, AWB
                     </p>
                   </div>
@@ -230,25 +226,17 @@ export function UploadButton({
               {/* ── File selected ── */}
               {step === "file-selected" && (
                 <div className="flex flex-col gap-5">
-                  <h2 className="text-base font-semibold text-white">Upload Document</h2>
+                  <h2 className="text-base font-semibold text-foreground">Upload Document</h2>
 
-                  {/* Compact file pill — no icon, left-aligned */}
-                  <div
-                    className="flex items-center justify-between gap-3 rounded-lg px-3 py-2.5"
-                    style={{
-                      background: "rgba(255,112,181,0.05)",
-                      border: "1px solid rgba(255,112,181,0.2)",
-                    }}
-                  >
+                  <div className="flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 bg-pink-50 border border-pink-200 dark:bg-[#FF70B50d] dark:border-[rgba(255,112,181,0.2)]">
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-xs font-medium text-white">{fileName}</p>
+                      <p className="truncate text-xs font-medium text-foreground">{fileName}</p>
                       <p className="text-[11px] text-muted-foreground">{fileSize} · PDF</p>
                     </div>
                     <button
                       type="button"
                       onClick={() => setStep("dropzone")}
-                      className="flex size-5 shrink-0 items-center justify-center rounded-full transition-colors hover:bg-white/10"
-                      style={{ color: "rgba(255,255,255,0.35)" }}
+                      className="flex size-5 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted"
                     >
                       <IconX size={11} stroke={2} />
                     </button>
@@ -286,7 +274,7 @@ export function UploadButton({
                     }}
                   />
                   <div className="text-center">
-                    <p className="text-sm font-medium text-white">Reading your document...</p>
+                    <p className="text-sm font-medium text-foreground">Reading your document...</p>
                     <p
                       key={msgIndex}
                       className="mt-1.5 text-xs text-muted-foreground"
@@ -304,7 +292,7 @@ export function UploadButton({
                   <div className="flex items-center gap-2">
                     <IconCircleCheckFilled size={17} style={{ color: "#34d399", flexShrink: 0 }} />
                     <div>
-                      <h2 className="text-base font-semibold text-white">Review Extracted Data</h2>
+                      <h2 className="text-base font-semibold text-foreground">Review Extracted Data</h2>
                       <p className="text-[11px] text-muted-foreground">
                         14 fields extracted — edit any field before saving
                       </p>

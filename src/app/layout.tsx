@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { Toaster } from "sonner";
 import { AppShell } from "@/components/layout/app-shell";
+import { ThemeProvider } from "@/components/layout/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,21 +29,24 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="h-full">
-        <AppShell>{children}</AppShell>
-        <Toaster
-          theme="dark"
-          position="bottom-right"
-          toastOptions={{
-            style: {
-              background: "#0f0f0f",
-              border: "1px solid rgba(255,255,255,0.08)",
-              color: "#f0f0f0",
-            },
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var s=localStorage.getItem('theme');var d=document.documentElement;if(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme: dark)').matches)){d.classList.add('dark')}else{d.classList.remove('dark')}})()`,
           }}
         />
+      </head>
+      <body className="h-full">
+        <ThemeProvider>
+          <AppShell>{children}</AppShell>
+          <Toaster
+            theme="system"
+            position="bottom-right"
+          />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -27,7 +27,7 @@ export function StatsRow() {
   return (
     <div className="grid grid-cols-3 gap-2 sm:gap-3">
       {STATS.map(({ label, value, delta }) => (
-        <Card key={label} size="sm" className="shadow-[0_4px_12px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <Card key={label} size="sm" className="shadow-[0_2px_8px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.06)]">
           <CardHeader>
             <CardTitle className="text-xs font-medium text-muted-foreground">
               {label}
